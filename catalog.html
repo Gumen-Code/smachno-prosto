@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смачно & Просто — Каталог Рецептів</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldBrand: '#0d9488',
+                        cyanBrand: '#06b6d4',
+                        lightBg: '#f0fdfa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .food-shape-avocado { border-radius: 60% 40% 50% 50% / 70% 50% 50% 30%; }
+        .food-shape-egg { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+        @media print {
+            body * { visibility: hidden; }
+            #singleRecipeView, #singleRecipeView * { visibility: visible; }
+            #singleRecipeView { position: absolute; left: 0; top: 0; width: 100%; border: none; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-lightBg text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Навігація -->
+    <nav class="bg-white/85 backdrop-blur-md sticky top-0 z-50 border-b border-teal-100 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 font-bold text-2xl text-teal-700 tracking-wide">
+                <span class="w-10 h-10 bg-teal-500 text-white flex items-center justify-center food-shape-avocado shadow-md">
+                    <i class="fa-solid fa-utensils text-lg"></i>
+                </span>
+                <span>Смачно<span class="text-cyan-500">&</span>Просто</span>
+            </a>
+            <div class="flex gap-6 text-sm font-semibold text-slate-600">
+                <a href="index.html" class="hover:text-teal-600 transition">Головна</a>
+                <a href="catalog.html" class="text-teal-600 border-b-2 border-teal-500 pb-1">Каталог рецептів</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Пошукова панель -->
+    <section class="bg-gradient-to-r from-teal-600 to-cyan-600 py-10 px-6 text-white no-print">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-4">Пошук страв українською</h1>
+            
+            <div class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto mb-4">
+                <input type="text" id="searchInput" placeholder="Введіть напр.: курка, яйця, сир, картопля..." 
+                       class="w-full px-6 py-3.5 rounded-2xl text-slate-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 text-sm">
+                <select id="searchType" class="px-4 py-3.5 bg-white text-slate-800 rounded-2xl font-medium text-sm focus:outline-none">
+                    <option value="name">За назвою</option>
+                    <option value="ingredient">За інгредієнтом</option>
+                </select>
+                <button id="searchBtn" class="px-8 py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition">
+                    Пошук
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- РЕКЛАМНИЙ БЛОК -->
+    <div class="max-w-7xl mx-auto px-6 pt-6 w-full no-print">
+        <div class="bg-teal-50/60 border border-teal-100 rounded-2xl p-4 text-center text-xs text-slate-400 tracking-wider uppercase">
+            📢 Рекламний блок Google AdSense (Каталог верхній)
+        </div>
+    </div>
+
+    <!-- Головний вміст -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
+        <div id="singleRecipeView" class="hidden bg-white p-6 sm:p-10 rounded-3xl shadow-lg border border-teal-100 mb-12">
+            <!-- Тут з'явиться перекладений рецепт -->
+        </div>
+
+        <h2 class="text-2xl font-bold text-slate-800 mb-6 no-print" id="catalogTitle">Всі рецепти</h2>
+        <div id="recipesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 no-print">
+            <p class="col-span-full text-center text-slate-400 py-12">Завантаження та переклад рецептів...</p>
+        </div>
+    </main>
+
+    <!-- РЕКЛАМНИЙ БЛОК -->
+    <div class="max-w-7xl mx-auto px-6 pb-8 w-full no-print">
+        <div class="bg-teal-50/60 border border-teal-100 rounded-2xl p-6 text-center text-xs text-slate-400 tracking-wider uppercase">
+            📢 Рекламний блок Google AdSense (Каталог нижній)
+        </div>
+    </div>
+
+    <!-- Підвал -->
+    <footer class="bg-slate-900 text-slate-400 mt-auto py-6 text-center text-xs no-print">
+        &copy; 2026 Смачно&Просто. Усі права захищено.
+    </footer>
+
+    <script>
+        // Словник для розумного перекладу українських інгредієнтів/запитів
+        const translationMap = {
+            'курка': 'chicken', 'курятина': 'chicken',
+            'яйця': 'egg', 'яйце': 'egg',
+            'сир': 'cheese',
+            'яловичина': 'beef', 'мʼясо': 'beef', 'мясо': 'beef',
+            'свинина': 'pork',
+            'риба': 'fish', 'лосось': 'salmon',
+            'картопля': 'potato',
+            'часник': 'garlic',
+            'помідор': 'tomato', 'томат': 'tomato',
+            'рис': 'rice',
+            'макарони': 'pasta'
+        };
+
+        function translateQuery(query) {
+            const clean = query.toLowerCase().trim();
+            return translationMap[clean] || query;
+        }
+
+        // Функція миттєвого перекладу тексту через Google Translate API на льоту
+        async function trText(text) {
+            if (!text) return '';
+            try {
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=uk&dt=t&q=${encodeURIComponent(text)}`);
+                const data = await res.json();
+                return data[0].map(item => item[0]).join('');
+            } catch(e) {
+                return text;
+            }
+        }
+
+        const grid = document.getElementById('recipesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const searchType = document.getElementById('searchType');
+        const searchBtn = document.getElementById('searchBtn');
+        const singleView = document.getElementById('singleRecipeView');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        const categoryParam = urlParams.get('category');
+        const searchParam = urlParams.get('search');
+
+        async function fetchSingleRecipe(id) {
+            singleView.classList.remove('hidden');
+            singleView.innerHTML = '<p class="text-center text-slate-400 py-8">Завантаження та переклад рецепта українською...</p>';
+            try {
+                const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+                const data = await res.json();
+                
+                if(data.meals && data.meals[0]) {
+                    const meal = data.meals[0];
+
+                    // Перекладаємо основні поля на льоту
+                    const titleUkr = await trText(meal.strMeal);
+                    const categoryUkr = await trText(meal.strCategory || 'Рецепт');
+                    const instructionsUkr = await trText(meal.strInstructions);
+
+                    let ingredients = '';
+                    for(let i=1; i<=20; i++) {
+                        if(meal[`strIngredient${i}`] && meal[`strIngredient${i}`].trim() !== '') {
+                            const ingName = await trText(meal[`strIngredient${i}`]);
+                            const ingMeasure = await trText(meal[`strMeasure${i}`] || '');
+                            ingredients += `<li class="text-sm text-slate-700 bg-teal-50 px-3 py-2 rounded-xl border border-teal-100 flex justify-between">
+                                <span>${ingName}</span>
+                                <span class="font-bold text-teal-700">${ingMeasure}</span>
+                            </li>`;
+                        }
+                    }
+
+                    singleView.innerHTML = `
+                        <div class="flex justify-between items-center mb-6 no-print">
+                            <button onclick="window.history.back()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full text-xs font-bold transition">
+                                ← Назад до каталогу
+                            </button>
+                            <div class="flex gap-2">
+                                <button onclick="window.print()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full text-xs font-bold transition">Завантажити / Друк PDF</button>
+                                <button onclick="navigator.clipboard.writeText(window.location.href); alert('Посилання на рецепт скопійовано!');" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full text-xs font-bold transition">Поділитись</button>
+                            </div>
+                        </div>
+
+                        <!-- Реклама усередині рецепта -->
+                        <div class="mb-6 border border-teal-100 rounded-2xl p-4 bg-teal-50/50 text-center text-xs text-slate-400 uppercase no-print">
+                            📢 Рекламний блок Google AdSense
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <img src="${meal.strMealThumb}" class="w-full h-80 object-cover rounded-3xl shadow-md">
+                            <div>
+                                <span class="px-3 py-1 bg-cyan-100 text-cyan-700 font-bold text-xs rounded-full">${categoryUkr}</span>
+                                <h2 class="text-3xl font-extrabold text-slate-800 mt-3 mb-4">${titleUkr}</h2>
+                                <h4 class="font-bold text-slate-700 mb-3">Інгредієнти:</h4>
+                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                                    ${ingredients}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 border-t border-slate-100 pt-6">
+                            <h4 class="font-bold text-slate-800 text-xl mb-3">Інструкція приготування:</h4>
+                            <p class="text-slate-600 leading-relaxed whitespace-pre-line text-sm">${instructionsUkr}</p>
+                        </div>
+                    `;
+                } else {
+                    singleView.innerHTML = '<p class="text-center text-red-400 py-8">Рецепт не знайдено.</p>';
+                }
+            } catch(e) {
+                singleView.innerHTML = '<p class="text-center text-red-400 py-8">Помилка завантаження даних.</p>';
+            }
+        }
+
+        async function fetchRecipes(query = '', type = 'name') {
+            grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-12">Шукаємо та перекладаємо рецепти...</p>';
+            
+            const translated = translateQuery(query);
+            let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${translated}`;
+            
+            if(type === 'ingredient' && query) {
+                url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${translated}`;
+            } else if(categoryParam && !query) {
+                url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryParam}`;
+            }
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if(data.meals) {
+                    // Перекладаємо назви страв для карток у каталозі
+                    const mealsPromises = data.meals.map(async meal => {
+                        const titleUkr = await trText(meal.strMeal);
+                        return `
+                            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border border-teal-50 flex flex-col justify-between group">
+                                <div>
+                                    <img src="${meal.strMealThumb}" alt="${titleUkr}" class="w-full h-52 object-cover group-hover:scale-105 transition duration-500">
+                                    <div class="p-6">
+                                        <h3 class="font-bold text-lg text-slate-800 group-hover:text-teal-600 transition mb-2">${titleUkr}</h3>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <a href="catalog.html?id=${meal.idMeal}" class="block text-center w-full py-3 bg-teal-50 group-hover:bg-teal-500 text-teal-700 group-hover:text-white font-semibold rounded-2xl transition">
+                                        Переглянути рецепт
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    grid.innerHTML = (await Promise.all(mealsPromises)).join('');
+                } else {
+                    grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-12">Нічого не знайдено за вашим запитом.</p>';
+                }
+            } catch(e) {
+                grid.innerHTML = '<p class="col-span-full text-center text-red-400 py-12">Помилка завантаження даних.</p>';
+            }
+        }
+
+        if(recipeId) {
+            fetchSingleRecipe(recipeId);
+        } else if(searchParam) {
+            searchInput.value = searchParam;
+            fetchRecipes(searchParam, 'name');
+        } else {
+            fetchRecipes('');
+        }
+
+        searchBtn.addEventListener('click', () => fetchRecipes(searchInput.value.trim(), searchType.value));
+        searchInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') fetchRecipes(searchInput.value.trim(), searchType.value);
+        });
+    </script>
+</body>
+</html>

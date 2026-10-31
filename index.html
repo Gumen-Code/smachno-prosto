@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смачно & Просто — Головна</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldBrand: '#0d9488',
+                        cyanBrand: '#06b6d4',
+                        skyBrand: '#0284c7',
+                        lightBg: '#f0fdfa'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .food-shape-avocado { border-radius: 60% 40% 50% 50% / 70% 50% 50% 30%; }
+        .food-shape-egg { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+        .food-shape-lemon { border-radius: 70% 30% 70% 30% / 50% 50% 50% 50%; }
+    </style>
+</head>
+<body class="bg-lightBg text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Навігація -->
+    <nav class="bg-white/85 backdrop-blur-md sticky top-0 z-50 border-b border-teal-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 font-bold text-2xl text-teal-700 tracking-wide">
+                <span class="w-10 h-10 bg-teal-500 text-white flex items-center justify-center food-shape-avocado shadow-md">
+                    <i class="fa-solid fa-utensils text-lg"></i>
+                </span>
+                <span>Смачно<span class="text-cyan-500">&</span>Просто</span>
+            </a>
+            <div class="flex gap-6 text-sm font-semibold text-slate-600">
+                <a href="index.html" class="text-teal-600 border-b-2 border-teal-500 pb-1">Головна</a>
+                <a href="catalog.html" class="hover:text-teal-600 transition">Каталог рецептів</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- РЕКЛАМНИЙ БЛОК: Верхній баннер -->
+    <div class="max-w-7xl mx-auto px-6 pt-4 w-full">
+        <div class="bg-teal-50/60 border border-teal-100 rounded-2xl p-4 text-center text-xs text-slate-400 tracking-wider uppercase">
+            📢 Рекламний блок Google AdSense (Верхній баннер)
+        </div>
+    </div>
+
+    <!-- Пошук -->
+    <header class="relative overflow-hidden py-16 px-6 bg-gradient-to-br from-teal-500 via-cyan-600 to-sky-600 text-white mt-4">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/10 food-shape-lemon blur-sm transform -rotate-12"></div>
+        <div class="absolute bottom-5 right-10 w-56 h-56 bg-white/10 food-shape-egg blur-md transform rotate-45"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="px-4 py-1.5 bg-white/20 rounded-full text-xs font-semibold tracking-wider uppercase backdrop-blur-md mb-4 inline-block">Що у вас у холодильнику?</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6 leading-tight">Знайдіть страви українською за інгредієнтами</h1>
+            
+            <div class="bg-white/10 p-3 rounded-3xl backdrop-blur-md max-w-2xl mx-auto flex flex-col sm:flex-row gap-3">
+                <input type="text" id="mainSearchInput" placeholder="Введіть продукт українською: курка, яйця, сир..." 
+                       class="w-full px-6 py-3.5 rounded-2xl text-slate-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 text-sm font-medium shadow-inner">
+                <button id="mainSearchBtn" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Пошук
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Категорії -->
+    <section class="max-w-7xl mx-auto px-6 py-14">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">Категорії страв</h2>
+        <p class="text-slate-500 text-sm mb-8">Обирайте за типами приготування</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            <a href="catalog.html?category=Breakfast" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-amber-100 text-amber-600 food-shape-egg flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🍳</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">Сніданки</h3>
+            </a>
+            <a href="catalog.html?category=Chicken" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-teal-100 text-teal-600 food-shape-avocado flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🍲</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">З куркою</h3>
+            </a>
+            <a href="catalog.html?category=Beef" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 food-shape-lemon flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🥩</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">М'ясні</h3>
+            </a>
+            <a href="catalog.html?category=Dessert" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-pink-100 text-pink-600 food-shape-lemon flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🍰</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">Десерти</h3>
+            </a>
+            <a href="catalog.html?category=Seafood" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-cyan-100 text-cyan-600 food-shape-egg flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🐟</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">Риба</h3>
+            </a>
+            <a href="catalog.html?category=Vegetarian" class="group bg-white p-5 rounded-3xl border border-teal-50 hover:border-teal-200 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
+                <div class="w-14 h-14 bg-emerald-100 text-emerald-600 food-shape-avocado flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">🥑</div>
+                <h3 class="font-bold text-slate-700 text-sm group-hover:text-teal-600 transition">Овочеві</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- РЕКЛАМНИЙ БЛОК: Центральний -->
+    <div class="max-w-7xl mx-auto px-6 mb-8 w-full">
+        <div class="bg-teal-50/60 border border-teal-100 rounded-2xl p-6 text-center text-xs text-slate-400 tracking-wider uppercase">
+            📢 Рекламний блок Google AdSense (Центральний баннер)
+        </div>
+    </div>
+
+    <!-- Популярні рецепти -->
+    <section class="max-w-7xl mx-auto px-6 py-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8">Популярні ідеї для вас</h2>
+        <div id="featuredRecipes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="col-span-full text-center text-slate-400 py-12">Завантаження та переклад ідей...</p>
+        </div>
+    </section>
+
+    <!-- РЕКЛАМНИЙ БЛОК: Нижній -->
+    <div class="max-w-7xl mx-auto px-6 my-10 w-full">
+        <div class="bg-teal-50/60 border border-teal-100 rounded-2xl p-6 text-center text-xs text-slate-400 tracking-wider uppercase">
+            📢 Рекламний блок Google AdSense (Нижній баннер)
+        </div>
+    </div>
+
+    <!-- Підвал -->
+    <footer class="bg-slate-900 text-slate-400 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center text-xs">
+            <p>&copy; 2026 Смачно&Просто. Усі права захищено.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mainSearchBtn').addEventListener('click', () => {
+            const val = document.getElementById('mainSearchInput').value.trim();
+            if(val) window.location.href = `catalog.html?search=${encodeURIComponent(val)}`;
+        });
+        document.getElementById('mainSearchInput').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                const val = document.getElementById('mainSearchInput').value.trim();
+                if(val) window.location.href = `catalog.html?search=${encodeURIComponent(val)}`;
+            }
+        });
+
+        async function trText(text) {
+            if (!text) return '';
+            try {
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=uk&dt=t&q=${encodeURIComponent(text)}`);
+                const data = await res.json();
+                return data[0].map(item => item[0]).join('');
+            } catch(e) {
+                return text;
+            }
+        }
+
+        async function loadFeatured() {
+            const container = document.getElementById('featuredRecipes');
+            try {
+                const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=b');
+                const data = await res.json();
+                if(data.meals) {
+                    const mealsPromises = data.meals.slice(0, 6).map(async meal => {
+                        const titleUkr = await trText(meal.strMeal);
+                        const categoryUkr = await trText(meal.strCategory || 'Рецепт');
+                        const instructionsUkr = await trText(meal.strInstructions);
+                        
+                        return `
+                            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border border-teal-50 flex flex-col justify-between group">
+                                <div>
+                                    <div class="relative overflow-hidden h-52">
+                                        <img src="${meal.strMealThumb}" alt="${titleUkr}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                        <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-teal-700 shadow-sm">
+                                            ${categoryUkr}
+                                        </span>
+                                    </div>
+                                    <div class="p-6">
+                                        <h3 class="font-bold text-lg text-slate-800 group-hover:text-teal-600 transition mb-2">${titleUkr}</h3>
+                                        <p class="text-slate-500 text-sm line-clamp-2">${instructionsUkr}</p>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <a href="catalog.html?id=${meal.idMeal}" class="block text-center w-full py-3 bg-teal-50 group-hover:bg-teal-500 text-teal-700 group-hover:text-white font-semibold rounded-2xl transition">
+                                        Переглянути рецепт
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    container.innerHTML = (await Promise.all(mealsPromises)).join('');
+                }
+            } catch(e) {
+                container.innerHTML = '<p class="col-span-full text-center text-red-400">Помилка завантаження даних.</p>';
+            }
+        }
+        loadFeatured();
+    </script>
+</body>
+</html>
